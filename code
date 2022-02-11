@@ -1,0 +1,327 @@
+<html id="html" style="background-color:black;color:silver;font-size:105%;overflow-x:hidden;  scroll-x:none;x-overflow:hidden; scroll-y:smooth; scroll-behavior: smooth; scroll-behavior: smooth; ">
+
+<body>
+ <p ><h2 align="center" style="font-size:200%;"><b>Hash <i>Teleporter</i></b></h2></p>
+ <hr>
+ <p align="center" style="margin:-0.3%;padding:0.50%;font-size:125%;">The hash <i>teleporter</i> can <b>Port</b> your <b>NaNoNet (<i>NNNet</i>) hashlinks</b>, <b>Itty.Bitty.Site (<i>IBS</i>) hashlinks</b>, <b>PvtPpr hashlinks</b>, <b>privately-formatted hashlinks</b>, <b>Base64</b>, <b>SHA256</b>, <b>SHA512</b>, <i>other <b>hash types</b></i> & <i>most <b>text-files</b></i> into a series of <i>scannable <b>QRs</b></i>.</br></br>Try the New EXPERIMENTAL Features to <b>TELEPORT</b> & <b>REMATERIALISE</b> Your <b><i>DATA</i></b>!</p>
+
+
+ <textarea id="inp" accept="file/*,image/*" onLoad="handleFileSelect(evt);selectedFiles(evt);"  rows="15" style="width:94%;padding:1.5%;margin:2.5%;text-align:center;background-color:lightgrey;color:black;" placeholder="Drag-Drop or Paste Text*||Text-Files||Hashes||Hashlinks Here" on></textarea>
+
+<p align="center" id="form1" style="align:center;text-align:center">
+ <b >Drag & Drop Type:</b></br>
+ <input align="center" type="radio" checked="checked" id="texto" onclick="this.checked=true;document.getElementById('b64o').checked=false;document.getElementById('doubleinp').checked=false;document.getElementById('b64o2').checked=false;document.getElementById('doubleinp2').checked=false;document.getElementById('inp2').style='display:none';document.getElementById('inp2').value='';document.getElementById('inp').style='display:inline-block;width:94%;padding:1.5%;margin:2.5%;text-align:center;background-color:lightgrey;color:black;';document.getElementById('inp').value='';"></input><label>&nbsp;Read</label> 
+ 
+ <input align="center" type="radio" id="b64o" onclick="document.getElementById('form1').style='display:none';document.getElementById('form1').value='';document.getElementById('form2').style='display:block;align:center;text-align:center;';document.getElementById('form2').align='center';document.getElementById('b64o2').checked=true;this.checked=true;document.getElementById('texto2').checked=false;document.getElementById('doubleinp2').checked=false;document.getElementById('inp').style='display:none';document.getElementById('inp').value='';document.getElementById('inp2').style='display:inline-block;width:94%;padding:1.5%;margin:2.5%;text-align:center;background-color:lightgrey;color:black;';document.getElementById('inp2').value='';"></input><label>&nbsp;Backup</label>
+ 
+ <input align="center" type="radio" id="doubleinp" onclick="document.getElementById('doubleinp2').checked=true;document.getElementById('doubleinp').checked=true;this.checked=true;document.getElementById('texto').checked=false;document.getElementById('b64o').checked=false;document.getElementById('texto2').checked=false;document.getElementById('b64o2').checked=false;document.getElementById('inp').style='display:inline-block;width:94%;padding:1.5%;margin:2.5%;text-align:center;background-color:lightgrey;color:black;';document.getElementById('inp2').style='display:inline-block;width:94%;padding:1.5%;margin:2.5%;text-align:center;background-color:lightgrey;color:black;';"><label>&nbsp;Both</label></input>
+</p>
+
+ <textarea id="inp2" accept="file/*,image/*" onLoad="handleFileSelect2(evt)" rows="15" style="width:94%;padding:1.5%;margin:2.5%;text-align:center;background-color:lightgrey;color:black;display:none;" placeholder="Drag-Drop or Paste Images||Files||QRs Here to get an Atomized QR Base64 Hash Backup of the Image|File|QR"></textarea>
+
+
+<p align="center" id="form2" style="align:center;text-align:center;display:none">
+ <b >Drag & Drop Type:</b></br>
+ <input align="center" type="radio" id="texto2" onclick="document.getElementById('form1').style='display:block;align:center;text-align:center;';document.getElementById('form1').align='center';document.getElementById('form2').style='display:none';document.getElementById('texto').checked=true;this.checked=true;document.getElementById('b64o').checked=false;document.getElementById('doubleinp').checked=false;document.getElementById('inp2').style='display:none';document.getElementById('inp2').value='';document.getElementById('inp').style='display:inline-block;width:94%;padding:1.5%;margin:2.5%;text-align:center;background-color:lightgrey;color:black;';document.getElementById('inp').value='';"><label>&nbsp;Read</label> </input>
+ 
+ <input align="center" type="radio" checked="checked" id="b64o2" onclick="this.checked=true;document.getElementById('texto2').checked=false;document.getElementById('doubleinp2').checked=false;document.getElementById('inp').style='display:none';document.getElementById('inp').value='';document.getElementById('inp2').style='display:inline-block;width:94%;padding:1.5%;margin:2.5%;text-align:center;background-color:lightgrey;color:black;';document.getElementById('inp2').value='';"><label>&nbsp;Backup</label> </input>
+ 
+ <input align="center" type="radio" id="doubleinp2" onclick="document.getElementById('form1').style='display:block;align:center;text-align:center;';document.getElementById('form2').style='display:none';document.getElementById('form1').align='center';document.getElementById('inp2').style='display:inline-block;width:94%;padding:1.5%;margin:2.5%;text-align:center;background-color:lightgrey;color:black;';document.getElementById('doubleinp').checked=true;this.checked=true;document.getElementById('texto').checked=false;document.getElementById('b64o').checked=false;document.getElementById('inp').style='display:inline-block;width:94%;padding:1.5%;margin:2.5%;text-align:center;background-color:lightgrey;color:black;';"><label>&nbsp;Both</label></input>
+</p>
+
+
+</br>
+<p align="center">
+<b>QR Data Size:</b></br>
+<input onLoad="rangeslide()" type="range" min="369" max="963" value="420" class="slider" id="myrange" onchange="document.getElementById('rangeout').innerHTML=this.value" style="align:center;width:85%;color:green;background-color:black;border-radius:25%;border-color:white;margin-left:1.75%;grid:snap;">&nbsp;&nbsp;&nbsp;<span id="rangeout" style="width:10%;" onLoad="document.getElementById('myrange').value=this.innerHTML;">420</span>
+</p>
+</br>
+
+ <input type="button" id="atom" value="Atomize" onclick="document.getElementById('demo').innerHTML='';document.getElementById('demo2').innerHTML='';document.getElementById('demo3').innerHTML='';splitter();document.getElementById('resetbutton').style='display:block;font-size:150%;align:center';document.getElementById('warning').style='display:none';document.getElementById('disptext').style='display:block';" align='center' style='margin-left:40vw;margin-top:-1.5%;margin-bottom:1.5%;font-size:125%;background-color:black;border:1.5px solid silver;color:limegreen;box-shadow: 0px 0px 8px black;'>&nbsp; &nbsp; </input>
+
+<input type="button" id="poter" value="Adheare to Buffer" onclick="gluer();document.getElementById('atom').style='display:none';document.getElementById('doit').style='display:inline-block;margin-left:2vw;margin-top:-1.5%;margin-bottom:1.5%;font-size:125%;background-color:black;border:1.5px solid silver;color:limegreen;box-shadow: 0px 0px 8px black;';this.style='margin-left:38vw;margin-top:-1.5%;margin-bottom:1.5%;font-size:125%;background-color:black;border:1.5px solid silver;color:limegreen;box-shadow: 0px 0px 8px black;';document.getElementById('resetbutton').style='display:block;font-size:150%;align:center;';document.getElementById('disptext').style='display:none';" align="center" style="margin-left:2vw;margin-top:-1.5%;margin-bottom:1.5%;font-size:125%;background-color:black;border:1.5px solid silver;color:limegreen;box-shadow: 0px 0px 8px black;">&nbsp; &nbsp; </input>
+
+<input type="button" id="doit" value="Rematerialize" onclick="remate();this.style='display:none';document.getElementById('poter').style='display:none'; document.getElementById('resetbutton').style='display:inline-block;font-size:150%;align:center';" align="center" style="display:none;"></input>
+
+<span align="center" id="buffer2" style="display:none;"></span>  
+</br>
+
+<span id="warning" align="center"><p align='center' style='border:solid 0.5px white;background-color:orange;color:black;padding:1.5%;border-raius:25%;text-align:center;'><b>THE REMATERIALISATION PROCESS IS AN EXPERIMENTAL ADDITION TO THE ATOMIZER.</br>NOT ALL ATOMIZED OBJECTS CAN BE STICHED BACK TOGETHER AT THIS TIME.</p><hr><sup>CHECK THE BIRTHING OF THE REMATERIALISED DATA TO SEE IF THERE'S ANY VISIABLE ENCODING MISHAPS (<i>I.E.: EXTRA %## OR LACKING %##</i>) BEFORE TELEPORTING.</sup></span>
+
+<span style="display:none" id="storage1"></span>
+<span style="display:none" id="storage2"></span>
+<span style="display:none" id="storage3"></span>
+
+<h2 id="resetbutton" align="center" style="display:none;" ><input type="button" style="font-size:150%;text-decoration:none;border:3px solid blue; background-color:black;color:skyblue;align:center;" onclick="document.location.reload(true);window.scrollTo(0,0);" value="Reset Hash DApp"></input></h2>
+
+ <a>
+  <p id="demo2" style="background-color:lightgrey;width:90%; padding:3%;text-align:center;  overflow:auto; word-wrap: break-word;margin-left:1.7%;" align="center"></p>
+ </a>
+<!--<sub id="savebuild" style="display:none" align="center"><a align="center" onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" href="#" download="page.html"><button  style="font-size:150%;text-decoration:none;border:3px solid blue; background-color:black;color:skyblue;align:center;margin:0.3%;">Download this Build</button></a>
+</sub> -->
+ </br>
+<h2 id='disptext' align='center' z-index='9' style='display:none;'><b>Right-Click or Hold-Touch to Download QRs</b></h2>
+ <p id="demo3" style="background-color:lightgrey;width:90%; padding:3%;text-align:center;  overflow:auto; word-wrap: break-word;color:darkgreen;margin-left:1.7%;" align="center">
+  </hr>
+ </p>
+
+ </br>
+ <p id="demo" style="background-color:lightgrey;width:90%; padding:3%;text-align:center;  overflow:auto; word-wrap: break-word;color:black;margin-left:1.7%;" align="center">
+  </hr>
+</p>
+<!--<sub id="downloadbottom" align="center"><a align="center" onclick="this.href='data:text/html;charset=UTF-8,'+encodeURIComponent(document.documentElement.outerHTML)" href="#" download="page.html"><button  style="font-size:150%;text-decoration:none;border:3px solid blue; background-color:black;color:skyblue;align:center;margin-bottom:3%;">Download a Copy of This <i>HashDApp</i></button></a>
+</sub> -->
+</br>
+<footer style="bottom:0;" align="cetner">
+<p align="center" style="text-align:center;">Hash Teleporter is a multi-combination experimental Hash based Decentralized App (<b>HashDApp</b>) of smaller <b>HashDApps</b>, <i>Hash Atomizer</i> & <i>slicer998</i>.</br></br>The actions not yet obtained are: <i>Reading data from within a QR from base64 hash of the QR image</i><b>,</b> <i>Correcting all URI encodings from <b>cross-encoded data-manipulation</b></i><b>,</b> <i>Click to Download the QR images</i><b>,</b> <i>Multi-level page saving</i></br><hr><p align="center"><a align="center" href="https://linktr.ee/3D_" target="_blank" style="text-decoration:none;color:limegreen;">A <b>3D</b>ouglas HashDApp<sup><i><b>**</b></i></sup></a><hr><h4 align="center"><b>#Teleporter (1st edition) Published 2021</b></h4></p><hr></p>
+</footer>
+<script>
+function gluer(){
+ var databulk = [];
+ databulk += document.getElementById('inp').value + " :|: " + document.getElementById('inp2').value;
+ document.getElementById('storage2').innerHTML += databulk;
+  document.getElementById('demo3').innerHTML = '';
+  document.getElementById('demo2').innerHTML = '';
+  document.getElementById('demo').innerHTML = '';
+ document.getElementById('inp').value="";
+ document.getElementById('inp').placeholder="Insert Next Section or Click Rematerialize...";
+ document.getElementById('inp2').value="";
+ document.getElementById('inp2').placeholder="Insert Next Section or Click Rematerialize...";
+<!--document.getElementById('downloadbottom').style="display:none";
+}
+ 
+ function remate(){
+  
+  var hiddata1 = document.getElementById('storage2').innerHTML.split(':|:')[0];
+  
+  
+  var data6 = "<a href="+(hiddata1)+" id='teleport' target='_blank' style='text-decoration:none;color:green;font-size:250%;' align='center' onclick='reseter();'>-->]|Click to <b>Teleport<i>!</i></b>|[<--</a>";
+  document.getElementById('demo2').innerHTML = data6;
+  document.getElementById('demo').innerHTML = (hiddata1.split(' :|:')[0]) + "</hr>" + (hiddata1.split(":|: ")[1]);
+  
+<!--document.getElementById('savebuild').style="display:block";
+ }
+ 
+ function reseter(){
+  document.getElementById('atom').style='display:inline-block;margin-left:40vw;margin-top:-1.5%;margin-bottom:1.5%;font-size:125%;background-color:black;border:1.5px solid silver;color:limegreen;box-shadow: 0px 0px 8px black;';
+  document.getElementById('poter').style='display:inline-block;margin-left:2vw;margin-top:-1.5%;margin-bottom:1.5%;font-size:125%;background-color:black;border:1.5px solid silver;color:limegreen;box-shadow: 0px 0px 8px black;';
+  document.getElementById('doit').style="display:none";
+  document.getElementById('inp').placeholder="Drag-Drop or Paste Text*||Text-Files||Hashes||Hashlinks Here"; 
+  document.getElementById('inp2').placeholder="Drag-Drop or Paste Images||Files||QRs Here to get an Atomized QR Base64 Hash Backup of the Image|File|QR"; 
+  document.getElementById('demo3').innerHTML = '';
+  document.getElementById('demo2').innerHTML = '';
+  document.getElementById('demo').innerHTML = '';
+ }
+</script>
+
+<script>
+function splitter(){
+ 
+ document.getElementById('inp').value += " :|: " + document.getElementById('inp2').value;
+ 
+ document.getElementById('storage1').innerHTML = document.getElementById('inp').value; 
+ 
+ var hashnum = document.getElementById('storage1').innerHTML.search("#");
+ 
+ if(hashnum > 0) {
+
+  var hashing = document.getElementById('storage1').innerHTML;
+  var hashl = hashing.length;
+  
+  document.getElementById('demo3').innerHTML += "</br><img type='image/png' src='https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=" + encodeURIComponent(document.getElementById('storage1').innerHTML.slice(0, hashnum+1)) + "'></img>";
+  
+  document.getElementById('demo').innerHTML += document.getElementById('storage1').innerHTML.slice(0, hashnum+2);
+  
+  document.getElementById('storage1').innerHTML = hashing.slice(hashnum+1, hashl+1);
+<!--document.getElementById('savebuild').style="display:block;font-size:150%;align:center;";  
+<!--document.getElementById('downloadbottom').style="display:none";
+cutter();
+ }
+ else{
+<!--document.getElementById('savebuild').style="display:block;font-size:150%;align:center;";
+<!--document.getElementById('downloadbottom').style="display:none";
+  document.getElementById('storage1').innerHTML = document.getElementById('inp').value;
+ cutter();
+}
+ 
+}
+ 
+ function cutter(){
+
+  var arr = [], trimmed = [], tooth = 0, toothwidth = document.getElementById('myrange').value;
+
+ arr = document.getElementById('storage1').innerHTML;
+ 
+   if (arr.length > 0){
+ 
+  trimmed = arr;
+  var al = arr.length;
+  
+  document.getElementById('demo3').innerHTML +=  "<img src='https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=" + trimmed.slice(tooth, toothwidth) + "' ></img>";
+  
+   document.getElementById('demo').innerHTML +=  trimmed.slice(tooth, toothwidth);
+  
+  document.getElementById('storage1').innerHTML = trimmed.slice(toothwidth, al);
+  
+    
+  blade(arr, trimmed, al, tooth, toothwidth);
+ }
+  
+ }
+  
+ 
+ function blade(arr, trimmed, al, tooth, toothwidth){
+  
+  arr = document.getElementById('storage1').innerHTML;
+  
+  if (arr.length > 0){
+ 
+  trimmed = arr;
+  al = arr.length;
+  
+  document.getElementById('demo3').innerHTML +=  "<img src='https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=" + trimmed.slice(tooth, toothwidth) + "'></img>";
+   
+   document.getElementById('demo').innerHTML +=  trimmed.slice(tooth, toothwidth); 
+ 
+  document.getElementById('storage1').innerHTML = trimmed.slice(toothwidth, al);
+  
+  blade2(arr, trimmed, al, tooth, toothwidth);
+  }
+  else {
+  document.getElementById('demo2').innerHTML += '<a href="' + (document.getElementById('demo').innerHTML.split(':|:')[0]) + '" target="_blank" rel="noopener noreferrer" style="font-size:250%;text-decoration:none;"><b>Teleport<i>!</i></b></a>'; 
+  }
+  
+ }
+ 
+ 
+ function blade2(arr, trimmed, al, tooth, toothwidth){
+  
+  arr = document.getElementById('storage1').innerHTML;
+    
+  if (arr.length > 0){
+ 
+  trimmed = arr;
+  al = arr.length;
+  
+  document.getElementById('demo3').innerHTML +=  "<img src='https://chart.googleapis.com/chart?chs=250x250&cht=qr&chl=" + trimmed.slice(tooth, toothwidth) + "'></img>";
+   
+   document.getElementById('demo').innerHTML +=  trimmed.slice(tooth, toothwidth);
+  
+  document.getElementById('storage1').innerHTML = trimmed.slice(toothwidth, al);
+  
+  blade(arr, trimmed, al, tooth, toothwidth);
+  }
+  
+  else {
+    document.getElementById('demo2').innerHTML += '<a href="' + (document.getElementById('demo').innerHTML.split(':|:')[0]) + '" target="_blank" rel="noopener noreferrer" style="font-size:250%;text-decoration:none;"><b>Teleport<i>!</i></b></a>'; 
+  }
+ }
+
+
+</script>
+<script>
+if (window.attachEvent) {
+    observe = function (element, event, handler) {
+        element.attachEvent('on'+event, handler);
+    };
+}
+else {
+    observe = function (element, event, handler) {
+        element.addEventListener(event, handler, false);
+    };
+}
+ </script>
+ <script>
+ 
+  function handleFileSelect(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+
+    var files = evt.dataTransfer.files; // FileList object.
+    var reader = new FileReader();  
+    reader.onload = function(event) {            
+         document.getElementById('inp').value = event.target.result;
+    }
+         reader.readAsText(files[0],"UTF-8");  
+  }
+   
+  
+  function handleFileSelect2(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+
+    var files = evt.dataTransfer.files; // FileList object.
+    var reader = new FileReader();  
+    reader.onload = function(event) {            
+         document.getElementById('inp2').value = event.target.result;
+    }
+         reader.readAsDataURL(files[0],"UTF-8");  
+  }
+   
+  function handleDragOver(evt) {
+    evt.stopPropagation();
+    evt.preventDefault();
+  }
+
+  
+  // Setup the dnd listeners.
+  var dropZone = document.getElementById('inp');
+  dropZone.addEventListener('dragover', handleDragOver, false);
+  dropZone.addEventListener('drop', handleFileSelect, false);
+   
+  document.getElementById('inp2').addEventListener('dragover', handleDragOver, false);
+  document.getElementById('inp2').addEventListener('drop', handleFileSelect2, false);
+  
+</script>
+<script>
+ 
+
+const listen (el, name) => handler => document.getElementById('inp').addEventListener(name, handler);
+
+const since = (onStart, onEnd) => {
+  let last = 0;
+  onStart(() => last = Date.now());
+  onEnd(() => last = 0);
+  return time => Date.now() - last < time;
+};
+ 
+ 
+ const longPress = since(
+   listen(listItem, "touchstart"),
+   listen(listItem, "touchend")
+);
+
+listen(listItem, "touchmove")(evt => {
+  if(longPress(100)) {
+    handleFileSelect(evt);
+   }
+});
+ 
+ 
+const listen (el, name) => handler => document.getElementById('inp2').addEventListener(name, handler);
+
+const since = (onStart, onEnd) => {
+  let last = 0;
+  onStart(() => last = Date.now());
+  onEnd(() => last = 0);
+  return time => Date.now() - last < time;
+};
+ 
+ 
+ const longPress = since(
+   listen(listItem, "touchstart"),
+   listen(listItem, "touchend")
+);
+
+listen(listItem, "touchmove")(evt => {
+  if(longPress(100)) {
+    handleFileSelect2(evt);
+   }
+});
+ </script>
+
+
+
+</body>
+
+</html>
